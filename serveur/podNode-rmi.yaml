@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: noderedis-rmi
+  labels:
+    app: noderedis-rmi
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: noderedis-rmi
+  template:
+    metadata:
+      labels:
+        app: noderedis-rmi
+    spec:
+      imagePullSecrets:
+        - name: regcred
+      containers:
+        - name: noderedis-rmi
+          image: cloud.canister.io:5000/arhturescriou/node-redis
+          ports:
+            - containerPort: 8080
+          env:
+            - name: PORT
+              value: '6379'
+            - name: REDIS_URL
+              value: 'redis://10.3.183.121:6379'
+           

@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis-rmi
+spec:
+  selector:
+    app: redis-rmi
+  ports:
+    - port: 6379
+      targetPort: 6379
+  type: LoadBalancer
